@@ -6,12 +6,6 @@ const value = inputField.value;
 let taskList = [];
 let storedTasks = JSON.parse(localStorage.taskList ?? '[]');
 
-var clearStorage = document.getElementById('clearStorage');
-clearStorage.onclick = function() {
-  localStorage.clear();
-  console.log(localStorage);
-}
-
 function addTodos() {
   taskList = storedTasks;
   for (let i = 0; i < storedTasks.length; i++) {
@@ -59,19 +53,14 @@ add.addEventListener("click", function () {
   });
 
   paragraph.addEventListener("dblclick", function () {
-    toDoContainer.removeChild(paragraph);
     for (var i = 0; i < taskList.length; i++) {
       if (taskList[i] === paragraph.innerText) {
         taskList.splice(i, 1);
-        break;
-      } else {
-        continue;
-      }
+      } 
     }
-    //taskList = storedTasks;
     localStorage.setItem("taskList", JSON.stringify(taskList));
-    console.log("-------------------------------------");
     console.log(localStorage);
+    toDoContainer.removeChild(paragraph);
   });
 });
 
